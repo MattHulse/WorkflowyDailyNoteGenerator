@@ -42,7 +42,7 @@ current_month = 0
 dates.each{|date|
   if date.month != current_month then
     # close previous month unless this is the first time through
-    buffer << "      </outline>" unless current_month == 0
+    buffer << "      </outline>\n" unless current_month == 0
 
     current_month = date.month
 
