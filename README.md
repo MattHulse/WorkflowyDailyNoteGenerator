@@ -52,6 +52,9 @@ Sample Output:
     </outline>
   </body>
 </opml>
-
-
 ```
+
+
+In WorkFlowy, the pasted data will be converted into a nice, simple calendar using official WorkFlowy dates: 
+
+![image](https://user-images.githubusercontent.com/56975/109404523-2450f100-7924-11eb-89bb-20d00c7f97d2.png)
