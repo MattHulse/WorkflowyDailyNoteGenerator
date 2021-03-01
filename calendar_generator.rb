@@ -6,6 +6,7 @@ require 'date'
 options = {}
 option_parser = OptionParser.new do |opt|
   opt.on('--year 2020') { |o| options[:year] = o }
+  opt.on('--emoji') { |o| options[:emoji] = true }
 end.parse!
 
 if options[:year].nil?
@@ -28,6 +29,8 @@ print "Generating calendar for #{year}..."
 #  </opml>
 
 
+#include daily note emoji
+DAILY_NOTE_EMOJI="&lt;a href=&quot;https://workflowy.com/#?q=%F0%9F%97%93&quot;&gt;🗓&lt;/a&gt;"
 
 dates = (Date.new(year.to_i)..Date.new(year.to_i+1)-1) #all dates for the requested year
 
@@ -52,7 +55,12 @@ dates.each{|date|
 
   formatted_date = date.strftime("%a, %b %-d, %Y")
 
-  buffer << "        <outline text=\"&lt;time startYear=&quot;#{date.year}&quot; startMonth=&quot;#{date.month}&quot; startDay=&quot;#{date.day}&quot;&gt;#{formatted_date}&lt;/time&gt;\" />\n"
+  if (options[:emoji]) then
+    buffer << "        <outline text=\"#{DAILY_NOTE_EMOJI} &lt;time startYear=&quot;#{date.year}&quot; startMonth=&quot;#{date.month}&quot; startDay=&quot;#{date.day}&quot;&gt;#{formatted_date}&lt;/time&gt;\" />\n"
+  else
+    buffer << "        <outline text=\"&lt;time startYear=&quot;#{date.year}&quot; startMonth=&quot;#{date.month}&quot; startDay=&quot;#{date.day}&quot;&gt;#{formatted_date}&lt;/time&gt;\" />\n"
+  end
+
 }
 
 buffer << "      </outline>\n" # close December
